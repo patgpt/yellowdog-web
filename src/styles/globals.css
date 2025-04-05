@@ -145,3 +145,21 @@
         opacity: 0.4; /* Increased initial opacity */
     }
 }
+
+/* PWA Install Prompt Slide-in Animation */
+@keyframes slide-in-bottom-right {
+    from {
+        transform: translate(100%, 100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@layer utilities {
+    .animate-slide-in-br {
+        animation: slide-in-bottom-right 0.7s ease-out forwards;
+    }
+}

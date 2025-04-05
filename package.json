@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "@types/js-cookie": "^3.0.6",
     "animejs": "^4.0.0",
     "contentful": "^11.5.12",
     "daisyui": "^5.0.12",
     "graphql": "^16.10.0",
     "graphql-yoga": "^5.13.2",
+    "js-cookie": "^3.0.5",
     "next": "15.2.4",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
