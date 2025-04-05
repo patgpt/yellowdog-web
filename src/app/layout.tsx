@@ -6,8 +6,9 @@ import '@/styles/globals.css'
 import { RootLayoutProps } from '@/types/global'
 import { cx } from '@/utils/cx'
 import { getAppSettings } from '@/utils/queries'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata, Viewport } from 'next'
-
 // Add viewport configuration for PWA theme color
 export const viewport: Viewport = {
     themeColor: 'oklch(20% 0 0)', // Match manifest theme_color
@@ -35,10 +36,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                     <Navbar />
                     {children}
                     <Footer />
-                    {/* <InstallDialog />
-                    <PushNotificationManager /> */}
+
+                    <Analytics />
+                    <SpeedInsights />
                 </Providers>
             </body>
         </html>
     )
 }
+// TODO: PWA - Install Dialog and Push Notification Manager needs to be fixed

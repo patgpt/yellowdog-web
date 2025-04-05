@@ -2036,6 +2036,13 @@ type ResourceSys {
 """
 type Settings implements Entry & _Node {
   _id: ID!
+  brandingDogNoShadow(locale: String, preview: Boolean): Asset
+  brandingDogShadow(locale: String, preview: Boolean): Asset
+  brandingFull(locale: String, preview: Boolean): Asset
+  brandingKatakanShadow(locale: String, preview: Boolean): Asset
+  brandingKatakanaNoShadow(locale: String, preview: Boolean): Asset
+  brandingTextNoShadow(locale: String, preview: Boolean): Asset
+  brandingTextShadow(locale: String, preview: Boolean): Asset
   contentfulMetadata: ContentfulMetadata!
   footerCopyrightText(locale: String): String
   footerLegalNavigationCollection(limit: Int = 100, locale: String, order: [SettingsFooterLegalNavigationCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkFilter): SettingsFooterLegalNavigationCollection
@@ -2062,6 +2069,13 @@ type SettingsCollection {
 input SettingsFilter {
   AND: [SettingsFilter]
   OR: [SettingsFilter]
+  brandingDogNoShadow_exists: Boolean
+  brandingDogShadow_exists: Boolean
+  brandingFull_exists: Boolean
+  brandingKatakanShadow_exists: Boolean
+  brandingKatakanaNoShadow_exists: Boolean
+  brandingTextNoShadow_exists: Boolean
+  brandingTextShadow_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   footerCopyrightText: String
   footerCopyrightText_contains: String

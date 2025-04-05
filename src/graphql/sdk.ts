@@ -19,11 +19,11 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-  Dimension: { input: any; output: any; }
-  HexColor: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  Quality: { input: any; output: any; }
+  DateTime: { input: string; output: string; }
+  Dimension: { input: number; output: number; }
+  HexColor: { input: string; output: string; }
+  JSON: { input: Record<string, unknown>; output: Record<string, unknown>; }
+  Quality: { input: number; output: number; }
 };
 
 /** Represents a binary file in a space. An asset can be any file type. */
@@ -3009,6 +3009,13 @@ export type ResourceSys = {
 export type Settings = Entry & _Node & {
   __typename?: 'Settings';
   _id: Scalars['ID']['output'];
+  brandingDogNoShadow?: Maybe<Asset>;
+  brandingDogShadow?: Maybe<Asset>;
+  brandingFull?: Maybe<Asset>;
+  brandingKatakanShadow?: Maybe<Asset>;
+  brandingKatakanaNoShadow?: Maybe<Asset>;
+  brandingTextNoShadow?: Maybe<Asset>;
+  brandingTextShadow?: Maybe<Asset>;
   contentfulMetadata: ContentfulMetadata;
   footerCopyrightText?: Maybe<Scalars['String']['output']>;
   footerLegalNavigationCollection?: Maybe<SettingsFooterLegalNavigationCollection>;
@@ -3023,6 +3030,55 @@ export type Settings = Entry & _Node & {
   siteTitle?: Maybe<Scalars['String']['output']>;
   socialLinksCollection?: Maybe<SettingsSocialLinksCollection>;
   sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingDogNoShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingDogShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingFullArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingKatakanShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingKatakanaNoShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingTextNoShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/settings) */
+export type SettingsBrandingTextShadowArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -3136,6 +3192,13 @@ export type SettingsCollection = {
 export type SettingsFilter = {
   AND?: InputMaybe<Array<InputMaybe<SettingsFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<SettingsFilter>>>;
+  brandingDogNoShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingDogShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingFull_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingKatakanShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingKatakanaNoShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingTextNoShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  brandingTextShadow_exists?: InputMaybe<Scalars['Boolean']['input']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   footerCopyrightText?: InputMaybe<Scalars['String']['input']>;
   footerCopyrightText_contains?: InputMaybe<Scalars['String']['input']>;
@@ -4905,6 +4968,13 @@ export type ResourceSysResolvers<ContextType = any, ParentType extends Resolvers
 
 export type SettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Settings'] = ResolversParentTypes['Settings']> = {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  brandingDogNoShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingDogNoShadowArgs>>;
+  brandingDogShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingDogShadowArgs>>;
+  brandingFull?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingFullArgs>>;
+  brandingKatakanShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingKatakanShadowArgs>>;
+  brandingKatakanaNoShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingKatakanaNoShadowArgs>>;
+  brandingTextNoShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingTextNoShadowArgs>>;
+  brandingTextShadow?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<SettingsBrandingTextShadowArgs>>;
   contentfulMetadata?: Resolver<ResolversTypes['ContentfulMetadata'], ParentType, ContextType>;
   footerCopyrightText?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<SettingsFooterCopyrightTextArgs>>;
   footerLegalNavigationCollection?: Resolver<Maybe<ResolversTypes['SettingsFooterLegalNavigationCollection']>, ParentType, ContextType, RequireFields<SettingsFooterLegalNavigationCollectionArgs, 'limit' | 'skip'>>;
