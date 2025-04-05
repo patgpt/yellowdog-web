@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+    themes: clight, cdark;
+    darktheme: cdark;
+    lighttheme: clight;
+    logs: true;
+}
+
+@plugin "daisyui/theme" {
+    name: 'clight';
+    default: true;
+    prefersdark: false;
+    color-scheme: 'light';
+    /* Palette from Yellowdog Logo */
+    --color-base-100: oklch(98% 0 0); /* Near white */
+    --color-base-200: oklch(96% 0 0); /* Very light grey */
+    --color-base-300: oklch(94% 0 0); /* Light grey */
+    --color-base-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    --color-primary: oklch(90% 0.2 95); /* Yellow */
+    --color-primary-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    --color-secondary: oklch(70% 0.15 300); /* Purple */
+    --color-secondary-content: oklch(98% 0 0); /* Near white */
+    --color-accent: oklch(85% 0.1 10); /* Pink */
+    --color-accent-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    --color-neutral: oklch(50% 0 0); /* Medium Neutral Grey */
+    --color-neutral-content: oklch(98% 0 0); /* Near white */
+    /* Keeping existing status colors */
+    --color-info: oklch(70% 0.183 293.541);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(76% 0.177 163.223);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(85% 0.199 91.936);
+    --color-warning-content: oklch(41% 0.112 45.904);
+    --color-error: oklch(71% 0.194 13.428);
+    --color-error-content: oklch(27% 0.105 12.094);
+    /* Keeping existing layout/style variables */
+    --radius-selector: 2rem;
+    --radius-field: 2rem;
+    --radius-box: 2rem;
+    --size-selector: 0.3125rem;
+    --size-field: 0.3125rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 1;
+}
+
+@plugin "daisyui/theme" {
+    name: 'cdark';
+    default: false;
+    prefersdark: true;
+    color-scheme: 'dark';
+    /* Palette from Yellowdog Logo - Dark Mode */
+    --color-base-100: oklch(20% 0 0); /* Very dark neutral grey */
+    --color-base-200: oklch(25% 0 0); /* Slightly lighter dark neutral grey */
+    --color-base-300: oklch(30% 0 0); /* Medium dark neutral grey */
+    --color-base-content: oklch(98% 0 0); /* Near white */
+    --color-primary: oklch(85% 0.18 95); /* Yellow (adjusted) */
+    --color-primary-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    --color-secondary: oklch(75% 0.16 300); /* Purple (adjusted) */
+    --color-secondary-content: oklch(98% 0 0); /* Near white */
+    --color-accent: oklch(88% 0.11 10); /* Pink (adjusted) */
+    --color-accent-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    --color-neutral: oklch(80% 0 0); /* Medium light grey */
+    --color-neutral-content: oklch(20% 0 0); /* Dark Neutral Grey */
+    /* Keeping existing status colors */
+    --color-info: oklch(74% 0.16 232.661);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(76% 0.177 163.223);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(64% 0.222 41.116);
+    --color-warning-content: oklch(98% 0 0); /* Near white */
+    --color-error: oklch(71% 0.194 13.428);
+    --color-error-content: oklch(27% 0.105 12.094);
+    /* Keeping existing layout/style variables */
+    --radius-selector: 2rem;
+    --radius-field: 2rem;
+    --radius-box: 2rem;
+    --size-selector: 0.3125rem;
+    --size-field: 0.3125rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 1;
+}
+
+@theme {
+    --font-sans: var(--font-sans);
+    --font-serif: var(--font-serif);
+}
+@layer base {
+    html {
+        font-family: var(--font-sans);
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-serif);
+    }
+    p {
+        font-family: var(--font-sans);
+    }
+}
+
+/* Add new glowing animation */
+@keyframes glow-animation {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4; /* Increased start/end opacity */
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.7; /* Increased peak opacity */
+    }
+}
+
+@layer utilities {
+    .glowing-primary-bg {
+        position: relative; /* Needed for absolute positioning of pseudo-element */
+        overflow: hidden; /* Prevent glow from spilling out */
+        background-color: var(--color-base-100); /* Set the base background */
+        z-index: 0; /* Establish stacking context */
+    }
+
+    .glowing-primary-bg::before {
+        content: '';
+        position: absolute;
+        z-index: -1; /* Place the glow behind the content */
+        top: 50%; /* Center the start of the glow */
+        left: 50%;
+        width: 150%; /* Make it large */
+        padding-bottom: 150%; /* Maintain aspect ratio (square) */
+        height: 0;
+        background: radial-gradient(
+            circle,
+            oklch(from var(--color-secondary) l c h / 0.6) 0%,
+            transparent 70%
+        ); /* Increased gradient opacity */
+        animation: glow-animation 8s ease-in-out infinite;
+        transform-origin: center center;
+        /* Translate to truly center it based on its own size and set initial state */
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4; /* Increased initial opacity */
+    }
+}

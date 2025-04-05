@@ -1,0 +1,80 @@
+query getSettings($id: String!) {
+    settings(id: $id) {
+        sys {
+            id
+        }
+        siteTitle
+        siteDescription
+        logo {
+            ...ImageAsset
+        }
+        headerNavigationCollection {
+            items {
+                title
+                href
+                icon {
+                    ...ImageAsset
+                }
+            }
+        }
+        footerServicesNavigationCollection {
+            items {
+                title
+                href
+                icon {
+                    ...ImageAsset
+                }
+            }
+        }
+        footerSiteNavigationCollection {
+            items {
+                title
+                href
+                icon {
+                    ...ImageAsset
+                }
+            }
+        }
+        footerLegalNavigationCollection {
+            items {
+                title
+                href
+                icon {
+                    ...ImageAsset
+                }
+            }
+        }
+        seo {
+            ...SeoFields
+        }
+        footerCopyrightText
+    }
+}
+
+fragment SeoFields on ComponentSeo {
+    sys {
+        id
+    }
+    pageTitle
+    pageDescription
+    canonicalUrl
+    nofollow
+    nofollow
+    noindex
+    shareImagesCollection {
+        items {
+            ...ImageAsset
+        }
+    }
+}
+
+fragment ImageAsset on Asset {
+    title
+    description
+    contentType
+    fileName
+    size
+    url
+    width
+    height
+}
