@@ -12,7 +12,12 @@ const compat = new FlatCompat({
 const eslintConfig = [
     ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
     {
-        ignores: ['./src/graphql/sdk.ts'],
+        ignores: ['./src/graphql/**/*.ts'],
+    },
+    {
+        rules: {
+            '@typescript-eslint/no-explicit-any': 'off',
+        },
     },
 ]
 

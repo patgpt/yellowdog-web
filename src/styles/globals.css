@@ -3,7 +3,6 @@
     themes: clight, cdark;
     darktheme: cdark;
     lighttheme: clight;
-    logs: true;
 }
 
 @plugin "daisyui/theme" {

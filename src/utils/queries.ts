@@ -1,4 +1,4 @@
-import { GetSettingsQuery } from '@/graphql/sdk'
+import { GetSettingsQuery } from '@/graphql/__generated__/sdk'
 import { GraphQLError } from 'graphql'
 import cms from './cms'
 
@@ -22,13 +22,5 @@ export const getAppSettings = async (): Promise<{
         status,
     }
 }
-
-
-
-
-
-
-
-
 
 // Let's create a fetcher here that will be used to fetch data from the API
