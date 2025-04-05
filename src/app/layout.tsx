@@ -1,7 +1,6 @@
 import Footer from '@/components/footer/footer'
 import Navbar from '@/components/navbar'
 import Providers from '@/components/providers'
-import InstallPrompt from '@/components/pwa/install-prompt'
 import { fontSans, fontSerif } from '@/styles/fonts'
 import '@/styles/globals.css'
 import { RootLayoutProps } from '@/types/global'
@@ -36,7 +35,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                     <Navbar />
                     {children}
                     <Footer />
-                    <InstallPrompt />
+                    {/* <InstallDialog />
+                    <PushNotificationManager /> */}
                 </Providers>
             </body>
         </html>

@@ -101,6 +101,9 @@
     p {
         font-family: var(--font-sans);
     }
+    a {
+        font-family: var(--font-serif);
+    }
 }
 
 /* Add new glowing animation */
