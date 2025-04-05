@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+    - name: Project Documentation
+      url: # Add URL to your project docs if applicable
+      about: Please check the documentation for answers first.
+    # You can add other contact links like Discord, Slack, etc.
