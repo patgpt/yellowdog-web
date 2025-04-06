@@ -1,0 +1,158 @@
+# Fragment for basic Asset details
+fragment AssetFragment on Asset {
+    sys {
+        id
+    }
+    title
+    description
+    contentType
+    fileName
+    width
+    height
+    url(transform: { width: 1000, quality: 80, format: WEBP }) # Example transform
+}
+
+# Fragment for SEO fields
+fragment SeoFragment on ComponentSeo {
+    sys {
+        id
+    }
+    pageTitle
+    pageDescription
+    canonicalUrl
+    nofollow
+    noindex
+    shareImagesCollection(limit: 1, preview: $preview) {
+        items {
+            ...AssetFragment
+        }
+    }
+}
+
+# Fragment for CTA fields
+fragment CtaFragment on ComponentCta {
+    sys {
+        id
+    }
+    ctaText
+    ctaLink
+    icon(preview: $preview) {
+        ...AssetFragment
+    }
+}
+
+# Fragment for Hero Component
+fragment HeroFragment on ComponentHero {
+    sys {
+        id
+    }
+    internalName
+    heading
+    subHeading
+    heroImage(preview: $preview) {
+        ...AssetFragment
+    }
+    ctaFieldsCollection(limit: 2, preview: $preview) {
+        items {
+            ...CtaFragment
+        }
+    }
+}
+
+# Fragment for Blog Post Preview (used in featured section)
+# Note: Excludes full 'content' field for brevity on landing page
+fragment BlogPostPreviewFragment on PageBlogPost {
+    sys {
+        id
+    }
+    internalName
+    title
+    slug
+    publishedDate
+    shortDescription
+    featuredImage(preview: $preview) {
+        ...AssetFragment
+    }
+    author(preview: $preview) {
+        sys {
+            id
+        }
+        name
+        avatar(preview: $preview) {
+            ...AssetFragment
+        }
+    }
+}
+
+# Main Fragment for the Landing Page
+fragment LandingPageFragment on PageLanding {
+    sys {
+        id
+    }
+    internalName
+    hero(preview: $preview) {
+        ...HeroFragment
+    }
+    featuredBlogPost(preview: $preview) {
+        ...BlogPostPreviewFragment
+    }
+    seoFields(preview: $preview) {
+        ...SeoFragment
+    }
+}
+
+# Main Fragment for this specific Landing Page query
+fragment LandingPageByIdData on PageLanding {
+    sys {
+        id
+    }
+    contentfulMetadata {
+        tags {
+            id
+            name
+        }
+    }
+    internalName
+    hero(preview: $preview) {
+        ...HeroFragment
+        # Also add metadata to nested linked entries if needed by their types
+        # sys { id } # Already included in HeroFragment
+        # contentfulMetadata { tags { id name } } # Add if Hero type needs it directly
+    }
+    featureCardsCollection(limit: 10, preview: $preview) {
+        items {
+            sys {
+                id
+            }
+            contentfulMetadata {
+                tags {
+                    id
+                    name
+                }
+            }
+            heading
+            description
+            image(preview: $preview) {
+                ...AssetFragment
+            }
+            # Add other fields from ComponentFeature if needed
+        }
+    }
+    featuredBlogPost(preview: $preview) {
+        ...BlogPostPreviewFragment
+        # sys { id } # Already included
+        # contentfulMetadata { tags { id name } } # Add if Blog type needs it directly
+    }
+    seoFields(preview: $preview) {
+        ...SeoFragment
+        # sys { id } # Already included
+        # contentfulMetadata { tags { id name } } # Add if SEO type needs it directly
+    }
+}
+
+# Query to get a specific Landing Page by ID
+query getLandingPageById($id: String!, $locale: String, $preview: Boolean) {
+    pageLanding(id: $id, locale: $locale, preview: $preview) {
+        ...LandingPageByIdData
+    }
+}

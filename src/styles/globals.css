@@ -87,7 +87,7 @@
 }
 @layer base {
     html {
-        font-family: var(--font-sans);
+        font-family: var(--font-serif);
     }
     h1,
     h2,
@@ -98,7 +98,7 @@
         font-family: var(--font-serif);
     }
     p {
-        font-family: var(--font-sans);
+        font-family: var(--font-serif);
     }
     a {
         font-family: var(--font-serif);

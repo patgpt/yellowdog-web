@@ -22,7 +22,20 @@ export const metadata: Metadata = {
         'Yellowdog is an Interactive Design Studio based in Canada, specializing in creating engaging and user-friendly digital experiences.',
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+// TODO: Add support for multiple locales and next/internationalization
+export async function generateStaticParams() {
+    return [
+        {
+            locale: 'en-US',
+        },
+    ]
+}
+
+export default async function RootLayout({
+    children,
+    params,
+}: RootLayoutProps) {
+    const { locale } = await params
     const appSettings = await getAppSettings()
     const links = appSettings.data?.settings?.headerNavigationCollection
     if (!links) {
@@ -30,8 +43,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     }
 
     return (
-        <html data-theme="clight" lang="en" suppressHydrationWarning>
-            <body className={cx(fontSans.variable, fontSerif.variable, 'antialiased')}>
+        <html lang={locale} suppressHydrationWarning>
+            <body
+                className={cx(
+                    fontSans.variable,
+                    fontSerif.variable,
+                    'antialiased',
+                )}
+            >
                 <Providers>
                     <Navbar />
                     {children}

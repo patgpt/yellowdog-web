@@ -21,11 +21,12 @@ dotenv.config({ path: '.env' })
  */
 const contentfulSchema = [
     {
-        [`${process.env.GRAPHQL_API_URL}?environment=${process.env.CONTENTFUL_ENVIRONMENT}`]: {
-            headers: {
-                Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        [`${process.env.GRAPHQL_API_URL}?environment=${process.env.CONTENTFUL_ENVIRONMENT}`]:
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+                },
             },
-        },
     },
 ]
 
@@ -49,7 +50,11 @@ const config: CodegenConfig = {
     generates: {
         // Generate TypeScript SDK with operations and resolvers
         'src/graphql/__generated__/sdk.ts': {
-            plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request', 'typescript-resolvers'],
+            plugins: [
+                'typescript',
+                'typescript-operations',
+                'typescript-graphql-request',
+            ],
             config: {
                 // Don't make fields optional
                 avoidOptionals: true,

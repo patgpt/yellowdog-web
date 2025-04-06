@@ -323,6 +323,7 @@ input AssetFilter {
 type AssetLinkingCollections {
   componentAuthorCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentAuthorCollection
   componentCtaCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentCtaCollection
+  componentFeatureCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentFeatureCollection
   componentHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentHeroCollection
   componentRichImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentRichImageCollection
   componentSeoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentSeoCollection
@@ -517,6 +518,92 @@ enum ComponentCtaOrder {
   ctaText_DESC
   internalName_ASC
   internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentFeature)
+"""
+type ComponentFeature implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  heading(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  internalId(locale: String): String
+  link(locale: String, preview: Boolean, where: NavigationLinkFilter): NavigationLink
+  linkedFrom(allowedLocales: [String]): ComponentFeatureLinkingCollections
+  sys: Sys!
+}
+
+type ComponentFeatureCollection {
+  items: [ComponentFeature]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input ComponentFeatureFilter {
+  AND: [ComponentFeatureFilter]
+  OR: [ComponentFeatureFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  image_exists: Boolean
+  internalId: String
+  internalId_contains: String
+  internalId_exists: Boolean
+  internalId_in: [String]
+  internalId_not: String
+  internalId_not_contains: String
+  internalId_not_in: [String]
+  link: cfNavigationLinkNestedFilter
+  link_exists: Boolean
+  sys: SysFilter
+}
+
+type ComponentFeatureLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentFeatureLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentFeatureLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentFeatureOrder {
+  heading_ASC
+  heading_DESC
+  internalId_ASC
+  internalId_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1135,10 +1222,26 @@ input NavigationLinkFilter {
 }
 
 type NavigationLinkLinkingCollections {
+  componentFeatureCollection(limit: Int = 100, locale: String, order: [NavigationLinkLinkingCollectionsComponentFeatureCollectionOrder], preview: Boolean, skip: Int = 0): ComponentFeatureCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   navigationLinkCollection(limit: Int = 100, locale: String, order: [NavigationLinkLinkingCollectionsNavigationLinkCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkCollection
   navigationMenuCollection(limit: Int = 100, locale: String, order: [NavigationLinkLinkingCollectionsNavigationMenuCollectionOrder], preview: Boolean, skip: Int = 0): NavigationMenuCollection
   settingsCollection(limit: Int = 100, locale: String, order: [NavigationLinkLinkingCollectionsSettingsCollectionOrder], preview: Boolean, skip: Int = 0): SettingsCollection
+}
+
+enum NavigationLinkLinkingCollectionsComponentFeatureCollectionOrder {
+  heading_ASC
+  heading_DESC
+  internalId_ASC
+  internalId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum NavigationLinkLinkingCollectionsNavigationLinkCollectionOrder {
@@ -1811,6 +1914,7 @@ To have an entry point for the app (e.g. Homepage) [See type definition](https:/
 type PageLanding implements Entry & _Node {
   _id: ID!
   contentfulMetadata: ContentfulMetadata!
+  featureCardsCollection(limit: Int = 100, locale: String, order: [PageLandingFeatureCardsCollectionOrder], preview: Boolean, skip: Int = 0, where: ComponentFeatureFilter): PageLandingFeatureCardsCollection
   featuredBlogPost(locale: String, preview: Boolean, where: PageBlogPostFilter): PageBlogPost
   hero(locale: String, preview: Boolean, where: ComponentHeroFilter): ComponentHero
   internalName(locale: String): String
@@ -1826,10 +1930,34 @@ type PageLandingCollection {
   total: Int!
 }
 
+type PageLandingFeatureCardsCollection {
+  items: [ComponentFeature]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageLandingFeatureCardsCollectionOrder {
+  heading_ASC
+  heading_DESC
+  internalId_ASC
+  internalId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input PageLandingFilter {
   AND: [PageLandingFilter]
   OR: [PageLandingFilter]
   contentfulMetadata: ContentfulMetadataFilter
+  featureCards: cfComponentFeatureNestedFilter
+  featureCardsCollection_exists: Boolean
   featuredBlogPost: cfPageBlogPostNestedFilter
   featuredBlogPost_exists: Boolean
   hero: cfComponentHeroNestedFilter
@@ -1993,6 +2121,8 @@ type Query {
   componentAuthorCollection(limit: Int = 100, locale: String, order: [ComponentAuthorOrder], preview: Boolean, skip: Int = 0, where: ComponentAuthorFilter): ComponentAuthorCollection
   componentCta(id: String!, locale: String, preview: Boolean): ComponentCta
   componentCtaCollection(limit: Int = 100, locale: String, order: [ComponentCtaOrder], preview: Boolean, skip: Int = 0, where: ComponentCtaFilter): ComponentCtaCollection
+  componentFeature(id: String!, locale: String, preview: Boolean): ComponentFeature
+  componentFeatureCollection(limit: Int = 100, locale: String, order: [ComponentFeatureOrder], preview: Boolean, skip: Int = 0, where: ComponentFeatureFilter): ComponentFeatureCollection
   componentHero(id: String!, locale: String, preview: Boolean): ComponentHero
   componentHeroCollection(limit: Int = 100, locale: String, order: [ComponentHeroOrder], preview: Boolean, skip: Int = 0, where: ComponentHeroFilter): ComponentHeroCollection
   componentRichImage(id: String!, locale: String, preview: Boolean): ComponentRichImage
@@ -2437,6 +2567,36 @@ input cfComponentCtaNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  sys: SysFilter
+}
+
+input cfComponentFeatureNestedFilter {
+  AND: [cfComponentFeatureNestedFilter]
+  OR: [cfComponentFeatureNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  image_exists: Boolean
+  internalId: String
+  internalId_contains: String
+  internalId_exists: Boolean
+  internalId_in: [String]
+  internalId_not: String
+  internalId_not_contains: String
+  internalId_not_in: [String]
+  link_exists: Boolean
   sys: SysFilter
 }
 

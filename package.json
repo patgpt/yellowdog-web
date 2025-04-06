@@ -12,6 +12,7 @@
         "generate": "graphql-codegen"
     },
     "dependencies": {
+        "@graphql-codegen/typescript-graphql-request": "^6.2.0",
         "@hookform/resolvers": "^5.0.1",
         "@types/js-cookie": "^3.0.6",
         "@vercel/analytics": "^1.5.0",
@@ -19,6 +20,7 @@
         "animejs": "^4.0.0",
         "contentful": "^11.5.12",
         "daisyui": "^5.0.12",
+        "framer-motion": "^12.6.3",
         "graphql": "^16.10.0",
         "graphql-yoga": "^5.13.2",
         "js-cookie": "^3.0.5",
@@ -39,6 +41,7 @@
         "@graphql-codegen/typescript": "^4.1.6",
         "@graphql-codegen/typescript-operations": "^4.6.0",
         "@tailwindcss/postcss": "^4",
+        "@types/animejs": "^3.1.13",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
